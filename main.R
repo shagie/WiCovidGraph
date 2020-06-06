@@ -26,7 +26,7 @@ p <- p + geom_bar(stat = "identity", aes(y = test, fill = label))
 p <- p + geom_point(aes(y = ratio))
 p <- p + geom_line(aes(y = rollmean(ratio, 7, fill = NA)))
 p <- p + scale_y_continuous(
-        sec.axis = sec_axis(trans = ~. / tmax, name = "% positive")
+        sec.axis = sec_axis(trans = ~. / (tmax/100), name = "% Positive tests")
 )
 p <- p + scale_x_date(name = "Day", labels = date_format("%m/%d"), breaks = date_breaks("week"))
 
