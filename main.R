@@ -23,22 +23,22 @@ test_totals <- data.frame(
 
 head(test_totals)
 
-p <- ggplot(test_totals, aes(x = date))
-p <- p + geom_bar(stat = "identity", aes(y = test, fill = label))
-p <- p + geom_point(aes(y = ratio))
-p <- p + geom_line(aes(y = rollmean(ratio, 7, fill = NA)))
-p <- p + scale_y_continuous(
-  sec.axis = sec_axis(trans = ~. / (tmax / 100), name = "% Positive tests")
-)
-p <- p + scale_x_date(
-  name = "Day",
-  labels = date_format("%m/%d"),
-  breaks = date_breaks("week")
-)
-# Labels
-p <- p + labs(
-  title = "Wisconsin Covid Testing"
-)
-p <- p + ylab("Total tests")
+p <- ggplot(test_totals, aes(x = date)) +
+  geom_bar(stat = "identity", aes(y = test, fill = label)) +
+  geom_point(aes(y = ratio)) +
+  geom_line(aes(y = rollmean(ratio, 7, fill = NA))) +
+  scale_y_continuous(
+    sec.axis = sec_axis(trans = ~. / (tmax / 100), name = "% Positive tests")
+  ) +
+  scale_x_date(
+    name = "Day",
+    labels = date_format("%m/%d"),
+    breaks = date_breaks("week")
+  ) +
+  # Labels
+  labs(
+    title = "Wisconsin Covid Testing"
+  ) +
+  ylab("Total tests")
 
 p
