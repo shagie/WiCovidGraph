@@ -3,7 +3,9 @@ library(scales)
 library(zoo)
 
 data <- read.csv("data.csv")
-data[16,] <- NA # negative tests/day ?
+# Test data for [16] has negative values - interpolate the positive ones
+data$TEST_NEW[16] <- (data$TEST_NEW[15] + data$TEST_NEW[17]) / 2
+data$NEG_NEW[16] <- (data$NEG_NEW[15] + data$NEG_NEW[17]) / 2
 date <- as.Date(data$LoadDttm, format("%Y/%m/%d %H:%M:%S+00"))
 
 ptests <- data$POS_NEW
