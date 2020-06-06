@@ -33,5 +33,10 @@ p <- p + scale_x_date(
   labels = date_format("%m/%d"),
   breaks = date_breaks("week")
 )
+# Labels
+p <- p + labs(
+  title = "Wisconsin Covid Testing"
+)
+p <- p + ylab("Total tests")
 
 p
