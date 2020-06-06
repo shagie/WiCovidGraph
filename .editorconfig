@@ -1,0 +1,37 @@
+root = true
+
+[*]
+ij_continuation_indent_size = 8
+ij_formatter_off_tag = @formatter:off
+ij_formatter_on_tag = @formatter:on
+ij_formatter_tags_enabled = false
+ij_smart_tabs = false
+ij_wrap_on_typing = false
+
+[{*.r,*.R,*.rprofile}]
+ij_continuation_indent_size = 2
+ij_r_align_multiline_parameters = true
+ij_r_align_multiline_parameters_in_calls = true
+ij_r_keep_blank_lines_in_code = 2
+ij_r_keep_indents_on_empty_lines = false
+ij_r_keep_line_breaks = true
+ij_r_space_after_comma = true
+ij_r_space_before_comma = false
+ij_r_space_before_for_left_brace = true
+ij_r_space_before_for_parentheses = true
+ij_r_space_before_if_left_brace = true
+ij_r_space_before_if_parentheses = true
+ij_r_space_before_method_call_parentheses = false
+ij_r_space_before_method_left_brace = true
+ij_r_space_before_method_parentheses = false
+ij_r_space_before_while_left_brace = true
+ij_r_space_before_while_parentheses = true
+ij_r_spaces_around_additive_operators = true
+ij_r_spaces_around_assignment_operators = true
+ij_r_spaces_around_multiplicative_operators = true
+ij_r_spaces_around_relational_operators = true
+ij_r_spaces_around_unary_operator = false
+ij_r_spaces_within_braces = true
+ij_r_spaces_within_brackets = false
+ij_r_spaces_within_parentheses = false
+ij_r_wrap_long_lines = false
