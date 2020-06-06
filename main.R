@@ -13,10 +13,10 @@ ttests <- data$TEST_NEW
 tmax <- max(ttests, na.rm = TRUE) * 6
 
 test_totals <- data.frame(
-        "date" = rep(date, 2),
-        "test" = c(ptests, ntests),
-        "label" = c(rep("pos", length(date)), rep("neg", length(date))),
-        "ratio" = rep(tmax * ptests / ttests, 2)
+  "date" = rep(date, 2),
+  "test" = c(ptests, ntests),
+  "label" = c(rep("pos", length(date)), rep("neg", length(date))),
+  "ratio" = rep(tmax * ptests / ttests, 2)
 )
 
 head(test_totals)
@@ -26,8 +26,12 @@ p <- p + geom_bar(stat = "identity", aes(y = test, fill = label))
 p <- p + geom_point(aes(y = ratio))
 p <- p + geom_line(aes(y = rollmean(ratio, 7, fill = NA)))
 p <- p + scale_y_continuous(
-        sec.axis = sec_axis(trans = ~. / (tmax/100), name = "% Positive tests")
+  sec.axis = sec_axis(trans = ~. / (tmax / 100), name = "% Positive tests")
 )
-p <- p + scale_x_date(name = "Day", labels = date_format("%m/%d"), breaks = date_breaks("week"))
+p <- p + scale_x_date(
+  name = "Day",
+  labels = date_format("%m/%d"),
+  breaks = date_breaks("week")
+)
 
 p
