@@ -28,7 +28,14 @@ p <- ggplot(test_totals, aes(x = date)) +
   geom_point(aes(y = ratio)) +
   geom_line(aes(y = rollmean(ratio, 7, fill = NA))) +
   scale_y_continuous(
-    sec.axis = sec_axis(trans = ~. / (tmax), name = "Positive tests", labels = percent),
+    sec.axis = sec_axis(
+      trans = ~. / (tmax),
+      name = "Positive tests",
+      labels = scales::percent_format(accuracy = 1)
+    ),
+    breaks = seq(0, max(ttests, na.rm = TRUE), by = 2000),
+    labels = scales::number_format(scale = 0.001, accuracy = 1),
+    name = "Total tests (thousands)"
   ) +
   scale_x_date(
     name = "Day",
@@ -38,7 +45,6 @@ p <- ggplot(test_totals, aes(x = date)) +
   # Labels
   labs(
     title = "Wisconsin Covid Testing"
-  ) +
-  ylab("Total tests")
+  )
 
 p
