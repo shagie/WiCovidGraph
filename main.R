@@ -5,13 +5,14 @@ library(zoo)
 data <- read.csv("data.csv")
 # Test data for [16] has negative values - interpolate the positive ones
 data$TEST_NEW[16] <- (data$TEST_NEW[15] + data$TEST_NEW[17]) / 2
-data$NEG_NEW[16] <- (data$NEG_NEW[15] + data$NEG_NEW[17]) / 2
+data$NEG_NEW[16] <- (data$TEST_NEW[16] - data$POS_NEW[16])
 date <- as.Date(data$LoadDttm, format("%Y/%m/%d %H:%M:%S+00"))
 
 ptests <- data$POS_NEW
 ntests <- data$NEG_NEW
 ttests <- data$TEST_NEW
 
+# Scale for second Y axis based on 1/6th of the total
 tmax <- max(ttests, na.rm = TRUE) * 6
 
 test_totals <- data.frame(
@@ -20,8 +21,6 @@ test_totals <- data.frame(
   "label" = c(rep("Positive", length(date)), rep("Negative", length(date))),
   "ratio" = rep(tmax * ptests / ttests, 2)
 )
-
-head(test_totals)
 
 p <- ggplot(test_totals, aes(x = date)) +
   geom_bar(stat = "identity", aes(y = test, fill = label)) +
