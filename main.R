@@ -22,7 +22,7 @@ test_totals <- data.frame(
   "ratio" = rep(tmax * ptests / ttests, 2)
 )
 
-p <- ggplot(test_totals, aes(x = date)) +
+combo_plot <- ggplot(test_totals, aes(x = date)) +
   geom_bar(stat = "identity", aes(y = test, fill = label)) +
   geom_point(aes(y = ratio)) +
   geom_line(aes(y = rollmean(ratio, 7, fill = NA))) +
@@ -47,4 +47,4 @@ p <- ggplot(test_totals, aes(x = date)) +
     fill = "Test Results"
   )
 
-p
+combo_plot
