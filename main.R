@@ -17,7 +17,7 @@ tmax <- max(ttests, na.rm = TRUE) * 6
 test_totals <- data.frame(
   "date" = rep(date, 2),
   "test" = c(ptests, ntests),
-  "label" = c(rep("pos", length(date)), rep("neg", length(date))),
+  "label" = c(rep("Positive", length(date)), rep("Negative", length(date))),
   "ratio" = rep(tmax * ptests / ttests, 2)
 )
 
@@ -44,7 +44,8 @@ p <- ggplot(test_totals, aes(x = date)) +
   ) +
   # Labels
   labs(
-    title = "Wisconsin Covid Testing"
+    title = "Wisconsin Covid Testing",
+    fill = "Test Results"
   )
 
 p
