@@ -3,9 +3,7 @@ library(scales)
 library(zoo)
 
 data <- read.csv("data.csv")
-# Test data for [16] has negative values - interpolate the positive ones
-data$TEST_NEW[16] <- (data$TEST_NEW[15] + data$TEST_NEW[17]) / 2
-data$NEG_NEW[16] <- (data$TEST_NEW[16] - data$POS_NEW[16])
+data[16,] <- NA
 date <- as.Date(data$LoadDttm, format("%Y/%m/%d %H:%M:%S+00"))
 
 ptests <- data$POS_NEW
@@ -25,7 +23,13 @@ test_totals <- data.frame(
 combo_plot <- ggplot(test_totals, aes(x = date)) +
   geom_bar(stat = "identity", aes(y = test, fill = label)) +
   geom_point(aes(y = ratio)) +
-  geom_line(aes(y = rollmean(ratio, 7, fill = NA))) +
+  geom_smooth(
+    method = "loess",
+    formula = "y ~ x",
+    span = 0.4,
+    na.rm = TRUE,
+    aes(y = ratio)
+  ) +
   scale_y_continuous(
     sec.axis = sec_axis(
       trans = ~. / (tmax),
