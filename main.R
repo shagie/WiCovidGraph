@@ -3,7 +3,10 @@ library(scales)
 library(zoo)
 
 data <- read.csv("data.csv")
-data[16,] <- NA
+# -694 new tests?  Blank the test data for 3/30
+data$POS_NEW[16] <- NA
+data$NEG_NEW[16] <- NA
+data$TEST_NEW[16] <- NA
 date <- as.Date(data$LoadDttm, format("%Y/%m/%d %H:%M:%S+00"))
 
 ptests <- data$POS_NEW
