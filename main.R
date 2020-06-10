@@ -55,3 +55,61 @@ combo_plot <- ggplot(test_totals, aes(x = date)) +
   )
 
 combo_plot
+
+####
+
+# -1 deaths?
+data$DTH_NEW[86] <- 0
+
+deaths <- data.frame(
+  "date" = date,
+  "deaths_cum" = data$DEATHS,
+  "deaths_new" = data$DTH_NEW
+)
+death_plot <- ggplot(deaths, aes(x = date)) +
+  geom_point(aes(y = deaths_new, )) +
+  geom_line(aes(y = rollmean(deaths_new, 7, fill = NA))) +
+  geom_smooth(
+    method = "loess",
+    formula = "y ~ x",
+    span = 0.4,
+    na.rm = TRUE,
+    aes(y = deaths_new)
+  ) +
+  scale_x_date(
+    name = "Day",
+    labels = date_format("%m/%d"),
+    breaks = date_breaks("week")
+  ) +
+  ylim(0, max(deaths$deaths_new, na.rm = TRUE))
+
+death_plot
+
+## Hospital
+
+hospital <- data.frame(
+  "date" = date,
+  "hosp" = data$HOSP_YES
+)
+
+hospital$diff <- ave(hospital$hosp, FUN=function(x) c(NA,diff(x)))
+
+hosp_plot <- ggplot(hospital, aes(x = date)) +
+  geom_point(aes(y = diff)) +
+  scale_x_date(
+    name = "Day",
+    labels = date_format("%m/%d"),
+    breaks = date_breaks("week")
+  ) +
+  geom_smooth(
+    method = "loess",
+    formula = "y ~ x",
+    span = 0.4,
+    na.rm = TRUE,
+    aes(y = diff)
+  ) +
+  ylim(0, max(hospital$diff, na.rm = TRUE))
+
+
+  hosp_plot
+
